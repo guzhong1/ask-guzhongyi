@@ -1,0 +1,4 @@
+health-records/
+*.local.md
+.DS_Store
+*.baiduyun.uploading.cfg

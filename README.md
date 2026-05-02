@@ -9,6 +9,7 @@
 1. 帮你把营养健康问题问得更清楚。
 2. 帮你整理饮食记录、体检信息、看病前的问题清单。
 3. 用比较稳妥、循证、实在的方式，给普通公众做营养健康科普。
+4. 在用户明确同意且工具支持本地文件读写时，维护本地 Markdown 健康档案。
 
 项目地址：
 
@@ -34,6 +35,7 @@ https://github.com/guzhong1/ask-guzhongyi
 4. “维生素 D、钙片、复合维生素到底有没有必要？”
 5. “我准备去看医生，能帮我整理一页病情摘要吗？”
 6. “医生开了处方，能帮我整理一下我需要注意和复诊时要问的问题吗？”
+7. “请帮我把身高、体重、疾病、饮食和运动记录到本地健康档案里。”
 
 ## 不适合问什么
 
@@ -65,6 +67,33 @@ cp -R ask-guzhongyi/skill/ask-guzhongyi ~/.codex/skills/
 5. 把这个文件夹放到你的 AI 工具指定的 Skills 目录中。
 
 如果你的工具不支持 Skill，也可以打开 `skill/ask-guzhongyi/SKILL.md`，把其中的规则复制到支持自定义提示词或智能体的平台里使用。
+
+## 本地健康档案
+
+这个 Skill 可以设计为维护本地 Markdown 健康档案，但有两个前提：
+
+1. 你使用的 AI 工具必须支持本地文件读写。
+2. 你必须明确同意记录，智能体不应该偷偷保存健康信息。
+
+推荐的私人档案目录是：
+
+```text
+health-records/
+  self.md
+  people/
+    father.md
+    mother.md
+  daily/
+    2026-05.md
+```
+
+`health-records/` 已经写入 `.gitignore`，真实健康档案不要上传到 GitHub。
+
+本地档案适合记录：
+
+1. 身体状况：身高、体重、已明确诊断、过敏史、用药、重要检查指标。
+2. 日常数据：饮食总热量估计、饮食结构、运动量、睡眠、症状变化。
+3. 关联人员：家人或其他咨询对象的称呼、关系、基本情况、身体状况、就医沟通信息。
 
 ## 怎么提问
 
@@ -109,6 +138,8 @@ README.md
 更详细的安全边界在 `skill/ask-guzhongyi/references/safety-boundaries.md`。
 
 更详细的咨询流程在 `skill/ask-guzhongyi/references/consultation-patterns.md`。
+
+本地健康档案规则在 `skill/ask-guzhongyi/references/health-records.md`。
 
 ## 授权
 
