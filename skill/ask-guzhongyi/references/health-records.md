@@ -1,20 +1,38 @@
 # Local Health Records
 
-Use this reference only when the user explicitly asks to maintain persistent health information and the current environment allows local file read/write.
+Use this reference whenever long-term nutrition or health consultation would benefit from persistent context and the current environment supports local file read/write.
 
-## Principle
+## Product Intention
 
-Health records are sensitive. Do not create, update, or infer persistent records silently.
+The health record is part of the consultation experience, not an afterthought.
 
-Before the first write, ask or confirm:
+Its purpose is to prevent context loss across conversations by keeping a clear, human-readable Markdown record of:
 
-“我可以在本地维护一个 Markdown 健康档案，后续咨询时用来减少上下文断层。这个档案可能包含身高、体重、疾病、饮食、运动和家人信息。是否要记录？”
+1. The user’s basic body status and diagnoses.
+2. Daily diet, calorie estimates, exercise, symptoms, and lifestyle data.
+3. Related people such as parents, spouse, children, or other consultation targets.
 
-If the user agrees, use local Markdown files.
+The format must be easy for ordinary users to open and understand.
 
-## Recommended Paths
+## Privacy Message
 
-Default private path inside a project:
+At first use, explain:
+
+“长期做营养健康咨询时，最好在本地留一个 Markdown 健康档案。这样以后再问，我可以直接参考你之前记录过的身高、体重、疾病、饮食、运动和家人情况，减少上下文断层。这个档案会保存在你电脑本地的 `health-records/` 文件夹里，本 Skill 不会把它上传到云端。是否要现在帮你建立？”
+
+Only create the first record after the user agrees.
+
+After creating or updating records, say:
+
+“我已经把这次信息记录到本地 `health-records/` 文件夹下了。以后你再咨询时，我可以参考这些本地 Markdown 档案。它们保存在你的本地电脑上，本 Skill 不会上传到云端。”
+
+If the tool cannot write local files, say:
+
+“当前工具环境看起来不能直接写入本地文件。你可以手动创建 `health-records/` 文件夹，并按我给你的 Markdown 模板保存。”
+
+## Directory Layout
+
+Default path:
 
 ```text
 health-records/
@@ -23,39 +41,72 @@ health-records/
   people/
     father.md
     mother.md
+    spouse.md
     child.md
   daily/
     2026-05.md
 ```
 
-Important:
+Rules:
 
 1. Add `health-records/` to `.gitignore`.
 2. Do not commit real health records.
-3. If the user chooses another path, follow the user’s path.
+3. Keep filenames simple, stable, and non-sensitive.
+4. If the user chooses another local path, follow the user’s path.
 
-## File: self.md
+## README.md Template
 
-Use this structure:
+Create `health-records/README.md`:
+
+```markdown
+# 本地健康档案说明
+
+这个文件夹用于保存营养健康咨询中的本地 Markdown 档案。
+
+这些文件保存在你的本地电脑上，不应该上传到 GitHub 或其他公开平台。
+
+## 文件说明
+
+- `self.md`：本人基本健康档案
+- `people/`：家人或其他咨询对象的健康档案
+- `daily/`：按月份保存的饮食、运动、体重、症状等日常记录
+
+## 使用提醒
+
+1. 每次咨询前，如果身高、体重、诊断、用药、检查指标有变化，请先更新。
+2. 涉及疾病营养建议时，应先有医生的明确诊断。
+3. 急症或持续加重症状，请直接线下就医或急诊评估。
+```
+
+## self.md Template
+
+Create `health-records/self.md`:
 
 ```markdown
 # 健康档案：本人
 
-> 私人健康信息。不要上传到公开仓库。
+> 私人健康信息。保存在本地电脑，不要上传到公开仓库。
+
+## 一句话概览
+
+- 当前目标：
+- 主要健康关注：
+- 最近更新时间：
 
 ## 基本信息
 
-- 姓名/称呼：
+- 称呼：
 - 性别：
 - 出生年份/年龄：
 - 身高：
 - 当前体重：
 - 目标体重/目标：
-- 记录更新时间：
+- 腰围/体脂率：
 
 ## 身体状况
 
 - 已明确诊断：
+- 疑似但未明确诊断：
 - 重要既往史：
 - 过敏史：
 - 当前用药：
@@ -71,15 +122,16 @@ Use this structure:
 - 睡眠：
 - 压力/工作节奏：
 
-## 咨询偏好与限制
+## 饮食偏好与现实限制
 
 - 饮食偏好：
 - 忌口/不吃：
 - 做饭条件：
+- 外食情况：
 - 预算/便利性：
 - 最难执行的地方：
 
-## 最近问题
+## 最近咨询问题
 
 - 
 
@@ -92,35 +144,40 @@ Use this structure:
 - YYYY-MM-DD：
 ```
 
-## Related People
+## Related Person Template
 
-For family members or other people, create one file per person under `health-records/people/`.
+Create one file per related person under `health-records/people/`.
 
-Use non-identifying filenames when appropriate, such as:
+Examples:
 
 ```text
 people/father.md
 people/mother.md
 people/spouse.md
-people/client-a.md
+people/child.md
 ```
 
-Structure:
+Template:
 
 ```markdown
 # 健康档案：称呼
 
-> 私人健康信息。不要上传到公开仓库。
+> 私人健康信息。保存在本地电脑，不要上传到公开仓库。
 
-## 关系与基本信息
+## 一句话概览
 
 - 与咨询者关系：
+- 主要健康关注：
+- 最近更新时间：
+
+## 基本信息
+
 - 称呼：
 - 性别：
 - 出生年份/年龄：
 - 身高：
 - 当前体重：
-- 记录更新时间：
+- 目标/主要诉求：
 
 ## 身体状况
 
@@ -155,9 +212,9 @@ Structure:
 - YYYY-MM-DD：
 ```
 
-## Daily Records
+## Daily Monthly Log Template
 
-Use monthly files for lightweight logs:
+Use `health-records/daily/YYYY-MM.md`:
 
 ```markdown
 # 日常记录：YYYY-MM
@@ -171,6 +228,7 @@ Use monthly files for lightweight logs:
 - 晚餐：
 - 加餐/饮料：
 - 总热量估计：
+- 蛋白质估计：
 - 结构观察：
 
 ### 运动
@@ -185,27 +243,51 @@ Use monthly files for lightweight logs:
 - 体重：
 - 症状：
 - 睡眠：
+- 情绪/压力：
 - 备注：
 ```
 
-## Update Rules
+## Automatic Update Rules
 
-When new information appears:
+After initialization, when the user provides new information during normal consultation, update the local record without asking every time, as long as it is clearly relevant and the user has not opted out.
 
-1. Identify whose record it belongs to: self, father, mother, spouse, child, client, etc.
-2. Update stable facts in the person profile.
-3. Update daily data in the monthly log.
-4. Put uncertain information under “待确认信息”.
-5. Do not overwrite old diagnoses or important values without preserving date context.
-6. Add an entry under “更新记录”.
+Update these categories:
 
-## Before Giving Advice From Records
+1. Stable body facts: height, weight, diagnoses, allergies, medication, supplements, key test results.
+2. Daily data: meals, calorie estimates, protein estimates, exercise, sleep, symptoms.
+3. Related people: names/labels, relationship, body status, diagnoses, symptoms, doctor opinions.
+4. Context: goals, constraints, preferences, execution difficulties.
 
-Say briefly:
+Do not infer uncertain medical facts. Put uncertain items under “待确认信息”.
 
-“我会参考你本地档案里的信息，但如果身高体重、诊断、用药或检查结果有变化，需要先更新。”
+Do not overwrite old important values without date context. Add a dated update record.
 
-Then proceed with normal safety boundaries.
+## Reply After Update
+
+After updating records, keep the note short:
+
+“我已经把这次信息记录到本地 `health-records/self.md` 和 `health-records/daily/YYYY-MM.md` 里了。以后再问时，我可以直接参考这些本地档案；它们保存在你的电脑上，本 Skill 不会上传到云端。”
+
+For related people:
+
+“我已经把这次信息记录到本地 `health-records/people/father.md` 里了。以后再问你父亲相关问题时，我可以参考这份本地档案；它保存在你的电脑上，本 Skill 不会上传到云端。”
+
+## Using Existing Records
+
+Before giving advice based on records, say briefly:
+
+“我会参考你本地档案里的信息；如果身高体重、诊断、用药或检查结果有变化，需要先更新。”
+
+Then follow normal safety boundaries.
+
+## User Controls
+
+Respect these requests:
+
+1. “不要记录”：stop updating persistent records.
+2. “删除我的档案”：delete the relevant local Markdown files if the environment permits.
+3. “给我看档案”：show the relevant file or a concise summary.
+4. “导出档案”：provide the Markdown content or path.
 
 ## Privacy
 

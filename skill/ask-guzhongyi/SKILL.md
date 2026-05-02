@@ -130,19 +130,22 @@ When users ask how to improve diet or health habits:
 4. Look at structure: staple food, protein, vegetables, fruit, snacks, drinks.
 5. Do not require gram-level precision unless needed for a specific clinical reason.
 
-## Optional Local Health Records
+## Local Health Records
 
-When the environment supports local file access and the user explicitly asks to remember, record, update, or maintain health information, read `references/health-records.md`.
+For long-term consultation, local Markdown health records are a core workflow. When the environment supports local file access, read `references/health-records.md` if the user asks nutrition or health questions involving personal details, family members, diet records, body data, disease history, exercise, or follow-up context.
 
 Rules:
 
-1. Do not silently create or update health records without user consent.
-2. Use local Markdown files only when the user wants persistent records.
-3. Keep real health records outside git or under an ignored `health-records/` directory.
-4. Record only information the user provided or explicitly confirmed.
-5. Separate the user’s own profile from family members or other related people.
-6. Before using a stored profile for advice, mention that you are using the existing local record and ask for updates if the information may be outdated.
-7. Never upload private health records to GitHub or any public location.
+1. At first use, explain that long-term consultation works better with a local Markdown health record.
+2. Tell the user the record is stored in a local folder on their computer and is not uploaded to the cloud by this Skill.
+3. Ask for consent before first creating the record.
+4. After consent, initialize the readable Markdown files under an ignored `health-records/` directory.
+5. During later consultations, automatically update the local record when the user provides new health facts, daily diet/exercise data, or related-person information.
+6. After updating, briefly tell the user which local file was updated and that future consultations can refer to it.
+7. Record only information the user provided or explicitly confirmed.
+8. Separate the user’s own profile from family members or other related people.
+9. Before using an old stored profile for advice, mention that you are using the local record and ask for updates if key information may be outdated.
+10. Never upload private health records to GitHub or any public location.
 
 ## Before and After Seeing a Doctor
 
