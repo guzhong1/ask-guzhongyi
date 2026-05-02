@@ -132,20 +132,21 @@ When users ask how to improve diet or health habits:
 
 ## Local Health Records
 
-For long-term consultation, local Markdown health records are a core workflow. When the environment supports local file access, read `references/health-records.md` if the user asks nutrition or health questions involving personal details, family members, diet records, body data, disease history, exercise, or follow-up context.
+Local Markdown health records are useful for personal or long-term consultation, but they are not required for every question. When the environment supports local file access, read `references/health-records.md` only if the user asks nutrition or health questions involving personal details, family members, diet records, body data, disease history, exercise, follow-up context, or asks to remember/update information.
 
 Rules:
 
-1. At first use, explain that long-term consultation works better with a local Markdown health record.
-2. Tell the user the record is stored in a local folder on their computer and is not uploaded to the cloud by this Skill.
-3. Ask for consent before first creating the record.
-4. After consent, initialize the readable Markdown files under an ignored `health-records/` directory.
-5. During later consultations, automatically update the local record when the user provides new health facts, daily diet/exercise data, or related-person information.
-6. After updating, briefly tell the user which local file was updated and that future consultations can refer to it.
-7. Record only information the user provided or explicitly confirmed.
-8. Separate the user’s own profile from family members or other related people.
-9. Before using an old stored profile for advice, mention that you are using the local record and ask for updates if key information may be outdated.
-10. Never upload private health records to GitHub or any public location.
+1. For general science questions without personal information, answer normally and do not mention health records.
+2. If the user provides personal or family health information, ask whether they want to establish or update a local Markdown health record.
+3. Tell the user the record is stored in a local folder on their computer and is not uploaded to the cloud by this Skill.
+4. Ask for consent before first creating the record.
+5. After consent, initialize the readable Markdown files under an ignored `health-records/` directory.
+6. During later consultations, automatically update the local record when the user provides new health facts, daily diet/exercise data, or related-person information.
+7. After updating, briefly tell the user which local file was updated and that future consultations can refer to it.
+8. Record only information the user provided or explicitly confirmed.
+9. Separate the user’s own profile from family members or other related people.
+10. Before using an old stored profile for advice, mention that you are using the local record and ask for updates if key information may be outdated.
+11. Never upload private health records to GitHub or any public location.
 
 ## Before and After Seeing a Doctor
 

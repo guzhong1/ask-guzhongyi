@@ -1,10 +1,10 @@
 # Local Health Records
 
-Use this reference whenever long-term nutrition or health consultation would benefit from persistent context and the current environment supports local file read/write.
+Use this reference only when the user’s question involves personal or family health information, daily records, follow-up context, or an explicit request to remember/update information, and the current environment supports local file read/write.
 
 ## Product Intention
 
-The health record is part of the consultation experience, not an afterthought.
+The health record is part of the personal and long-term consultation experience, not an afterthought. It is not needed for every general science question.
 
 Its purpose is to prevent context loss across conversations by keeping a clear, human-readable Markdown record of:
 
@@ -14,11 +14,32 @@ Its purpose is to prevent context loss across conversations by keeping a clear, 
 
 The format must be easy for ordinary users to open and understand.
 
+## Trigger Judgment
+
+Do not mention local health records when the user asks general questions such as:
+
+1. “晚上吃碳水会胖吗？”
+2. “维生素 D 有必要补吗？”
+3. “咖啡空腹喝伤胃吗？”
+4. “蛋白粉是不是智商税？”
+
+Consider asking whether to create or update a local health record when the user provides personal or family information, such as:
+
+1. Height, weight, body fat, waist circumference.
+2. Diagnoses, symptoms, medication, allergies, test results.
+3. A daily meal, calorie estimate, exercise amount, sleep, weight record.
+4. Family member or related-person information.
+5. Long-term goals such as weight loss, blood sugar control, lipid control, or repeated follow-up.
+
+Suggested transition:
+
+“你这个问题已经涉及个人情况。如果你打算之后持续咨询，我可以帮你在本地建立一个 Markdown 健康档案，记录身高、体重、诊断、饮食、运动等信息，之后就不用每次重新说一遍。需要我建立吗？”
+
 ## Privacy Message
 
-At first use, explain:
+When personal information appears and no local record exists, explain:
 
-“长期做营养健康咨询时，最好在本地留一个 Markdown 健康档案。这样以后再问，我可以直接参考你之前记录过的身高、体重、疾病、饮食、运动和家人情况，减少上下文断层。这个档案会保存在你电脑本地的 `health-records/` 文件夹里，本 Skill 不会把它上传到云端。是否要现在帮你建立？”
+“你这个问题已经涉及个人情况。长期做营养健康咨询时，最好在本地留一个 Markdown 健康档案。这样以后再问，我可以直接参考你之前记录过的身高、体重、疾病、饮食、运动和家人情况，减少上下文断层。这个档案会保存在你电脑本地的 `health-records/` 文件夹里，本 Skill 不会把它上传到云端。是否要现在帮你建立？”
 
 Only create the first record after the user agrees.
 
@@ -249,7 +270,7 @@ Use `health-records/daily/YYYY-MM.md`:
 
 ## Automatic Update Rules
 
-After initialization, when the user provides new information during normal consultation, update the local record without asking every time, as long as it is clearly relevant and the user has not opted out.
+After initialization, when the user provides new personal or family health information during normal consultation, update the local record without asking every time, as long as it is clearly relevant and the user has not opted out.
 
 Update these categories:
 
